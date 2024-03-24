@@ -23,14 +23,14 @@
         packages = {
           asdf2nix = mkPoetryApplication { projectDir = self; };
           default = self.packages.${system}.asdf2nix;
-          checkPhase = "pytest";
         };
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.asdf2nix ];
           packages = with pkgs; [
-            poetry
             python3
+            poetry
+            pre-commit
             ruff
             black
           ];
