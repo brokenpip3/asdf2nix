@@ -85,6 +85,10 @@ on linux_amd64
 ...
 ```
 
+## Limitations
+
+Due to the fact that not all patch versions are present, a slight change between patch versions is tolerated (e.g., `3.4.1` vs `3.4.3`), while a change in minor/major versions will not be considered.
+
 ## Credits
 
 * Special thanks to `RikudouSage` for the versions [database](https://github.com/RikudouSage/NixPackageHistoryBackend).
