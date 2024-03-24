@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "asdf2nix"
+version = "0.1.0"
+description = "Generate Flake from an asdf .tool-versions file"
+authors = ["Brokenpip3 <brokenpip3@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.scripts]
+asdf2nix = "asdf2nix:app"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+typer = {extras = ["all"], version = "^0.10.0"}
+requests = "^2.31.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

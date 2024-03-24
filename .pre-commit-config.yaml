@@ -1,0 +1,33 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+  - id: check-toml
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.28.0
+  hooks:
+    - id: check-dependabot
+    - id: check-github-workflows
+      args: ["--verbose"]
+
+- repo: https://github.com/asottile/reorder-python-imports
+  rev: v3.12.0
+  hooks:
+  -   id: reorder-python-imports
+
+- repo: https://github.com/psf/black
+  rev: 24.3.0
+  hooks:
+  -   id: black
+
+- repo: local
+  hooks:
+  - id: pytest-check
+    name: pytest-check
+    types: [python]
+    files: ^jcli/
+    entry: pytest -v -s .
+    language: system
+    pass_filenames: false

@@ -1,0 +1,30 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_style = space
+indent_size = 2
+
+# From: https://github.com/NixOS/nix/blob/master/.editorconfig
+# Match nix files, set indent to spaces with width of two
+[*.nix]
+indent_style = space
+indent_size = 2
+
+# Match c++/shell/perl, set indent to spaces with width of four
+[*.{hpp,cc,hh,sh,pl,xs}]
+indent_style = space
+indent_size = 4
+
+# Match diffs, avoid to trim trailing whitespace
+[*.{diff,patch}]
+trim_trailing_whitespace = false

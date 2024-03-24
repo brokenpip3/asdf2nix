@@ -1,0 +1,37 @@
+version: '3'
+
+tasks:
+  flake-check:
+    desc: check whether the flake evaluates and run its tests
+    cmds:
+      - nix flake check
+
+  flake-update-all:
+    desc: update all flake inputs
+    cmds:
+      - printf "\n> Updating all flake inputs\n\n"
+      - nix flake update
+    silent: true
+
+  flake-update-one:
+    desc: update one flake imput like nixpkgs or flake-utils
+    cmds:
+      - printf "\n> Updating flake input {{.CLI_ARGS}}\n\n"
+      - nix flake lock --update-input {{.CLI_ARGS}}
+    silent: true
+
+  tests:
+    desc: run pytests
+    cmds:
+      - pytest -v -s
+
+  pre-commit:
+    desc: inizialize pre-commit
+    cmds:
+      - pre-commit install
+    sources:
+      - .git/hooks/pre-commit
+      - .pre-commit-config.yaml
+    generates:
+      - .git/hooks/pre-commit
+    method: checksum
