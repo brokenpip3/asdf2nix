@@ -1,4 +1,5 @@
 import re
+import subprocess
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
@@ -69,6 +70,17 @@ def compare_versions(version1: str, version2: str) -> tuple[bool, str]:
         return False, ""
 
 
+def generate_shell_from_tools_version(tools: List[Tool]) -> str:
+    """
+    Generate a nix shell command
+    like "nix shell nixpkgs/revision1#tool1 nixpkgs/revision2#tool2"
+    """
+    shell_command = "nix shell"
+    for tool in tools:
+        shell_command += f" nixpkgs/{tool.revision}#{tool.name}"
+    return shell_command
+
+
 def generate_flake_from_tools_version(tools: List[Tool]) -> str:
     system = "${system}"
     flake_content = """
@@ -120,27 +132,25 @@ def generate_flake_from_tools_version(tools: List[Tool]) -> str:
     return flake_content
 
 
-@app.command()
-def flake(
-    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None
-) -> str:
+def read_tool_versions_file(file_path: Path) -> List[str]:
     """
-    Generate a flake from .tool-versions file.
-
-    You can optional pass an argument to specify the path to the .tool-versions file.
+    Read the .tool-versions file and return the lines.
     """
-    if file is None:
-        file = Path.cwd() / ".tool-versions"
     try:
-        with open(file, "r") as file:
-            tools_lines = file.readlines()
+        with open(file_path, "r") as file:
+            return file.readlines()
     except FileNotFoundError:
-        typer.echo(f"File {file} not found.")
+        typer.echo(f"File {file_path} not found.")
         raise typer.Exit(code=1)
 
+
+def get_revised_tools(tools_lines: List[str]) -> List[Tool]:
+    """
+    Fetch the revised tool information for each tool in the .tool-versions file.
+    """
     tools = []
     for line in tools_lines:
-        name, version = line.strip("").split()
+        name, version = line.strip().split()
         tool = Tool(name=name, version=version)
         try:
             revised_tool = get_revision(tool)
@@ -148,9 +158,41 @@ def flake(
                 tools.append(revised_tool)
         except ValueError as err:
             typer.echo(err)
+    return tools
 
+
+@app.command()
+def flake(
+    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None
+) -> str:
+    """
+    Generate a flake from .tool-versions file.
+    """
+    if file is None:
+        file = Path.cwd() / ".tool-versions"
+    tools_lines = read_tool_versions_file(file)
+    tools = get_revised_tools(tools_lines)
     flake_content = generate_flake_from_tools_version(tools)
     typer.echo(flake_content)
+
+
+@app.command()
+def shell(
+    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None
+) -> str:
+    """
+    Run a nix shell from .tool-versions file.
+    """
+    if file is None:
+        file = Path.cwd() / ".tool-versions"
+    tools_lines = read_tool_versions_file(file)
+    tools = get_revised_tools(tools_lines)
+    shell_command = generate_shell_from_tools_version(tools)
+    try:
+        typer.echo(f"Generating shell from .tool-versions: {shell_command}")
+        subprocess.run(shell_command, shell=True)
+    except subprocess.CalledProcessError as err:
+        typer.echo(err)
 
 
 @app.command()

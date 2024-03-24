@@ -59,3 +59,9 @@ def test_flake_generation_minor(capsys):
             "terraform = inputs.terraform_1_6_4.legacyPackages.${system}.terraform;"
             in result.output
         )
+
+
+def test_shell_file_not_found(capsys):
+    result = runner.invoke(app, ["shell", "nonexistent_file.txt"])
+    assert result.exit_code == 1
+    assert "nonexistent_file.txt not found." in result.output
