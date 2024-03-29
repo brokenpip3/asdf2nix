@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asdf2nix"
-version = "0.2.0"
+version = "0.3.0"
 description = "Generate Flake or run a shell from an asdf .tool-versions file"
 authors = ["Brokenpip3 <brokenpip3@gmail.com>"]
 license = "MIT"

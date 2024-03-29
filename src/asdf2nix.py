@@ -18,7 +18,7 @@ class Tool:
     revision: Optional[str] = None
 
 
-asf2nix_version = "0.1.0"
+asf2nix_version = "0.3.0"
 app = typer.Typer()
 nix_packages_api = "https://api.history.nix-packages.com/packages"
 
