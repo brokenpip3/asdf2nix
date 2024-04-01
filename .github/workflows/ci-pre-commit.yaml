@@ -19,7 +19,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - id: files
-      uses: tj-actions/changed-files@v43
+      uses: tj-actions/changed-files@v44
     #TODO: check why trigger a infinite recursion but works fine locally
     #- name: nix checks
     #  run: nix flake check
