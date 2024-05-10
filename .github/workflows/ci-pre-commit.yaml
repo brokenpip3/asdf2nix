@@ -10,16 +10,16 @@ jobs:
     name: PreCommit
     runs-on: ubuntu-latest
     steps:
-    - uses: DeterminateSystems/nix-installer-action@v10
+    - uses: DeterminateSystems/nix-installer-action@v11
       with:
         diagnostic-endpoint: ""
-    - uses: DeterminateSystems/magic-nix-cache-action@v4
+    - uses: DeterminateSystems/magic-nix-cache-action@v6
       with:
         diagnostic-endpoint: ""
     - name: Checkout
       uses: actions/checkout@v4
     - id: files
-      uses: tj-actions/changed-files@v43
+      uses: tj-actions/changed-files@v44
     #TODO: check why trigger a infinite recursion but works fine locally
     #- name: nix checks
     #  run: nix flake check
