@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.scripts]
-asdf2nix = "asdf2nix:app"
+asdf2nix = "asdf2nix.asdf2nix:app"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -16,6 +16,17 @@ requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.1.1"
+
+[tool.pytest.ini_options]
+pythonpath = ["asdf2nix"]
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
 
 [build-system]
 requires = ["poetry-core"]
