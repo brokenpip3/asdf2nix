@@ -2,9 +2,9 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
-from src.asdf2nix import app
-from src.asdf2nix import asf2nix_version
-from src.asdf2nix import version
+from asdf2nix.asdf2nix import app
+from asdf2nix.asdf2nix import asf2nix_version
+from asdf2nix.asdf2nix import version
 
 runner = CliRunner()
 

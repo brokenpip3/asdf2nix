@@ -2,7 +2,7 @@
   description = "Application packaged using poetry2nix";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
     poetry2nix = {
       url = "github:nix-community/poetry2nix";
@@ -14,14 +14,17 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication;
+        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication mkPoetryEnv defaultPoetryOverrides;
       in
       {
         # nix fmt formatter
         formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
         packages = {
-          asdf2nix = mkPoetryApplication { projectDir = self; };
+          asdf2nix = mkPoetryApplication {
+            python = pkgs.python3;
+            projectDir = self;
+          };
           default = self.packages.${system}.asdf2nix;
         };
 
