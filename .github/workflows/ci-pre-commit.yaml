@@ -10,7 +10,7 @@ jobs:
     name: PreCommit
     runs-on: ubuntu-latest
     steps:
-    - uses: DeterminateSystems/nix-installer-action@v14
+    - uses: DeterminateSystems/nix-installer-action@v16
       with:
         diagnostic-endpoint: ""
     - uses: DeterminateSystems/magic-nix-cache-action@v8
