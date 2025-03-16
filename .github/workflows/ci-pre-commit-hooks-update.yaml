@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 10 * * *"
+
+jobs:
+  pre-commit-update:
+    name: PreCommitHooksUpdate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Update pre-commit hooks
+        uses: brokenpip3/action-pre-commit-update@58089b10c2e135cfddfbcd36a85afdf73da5b0ce # 0.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
