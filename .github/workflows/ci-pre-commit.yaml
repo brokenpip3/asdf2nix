@@ -10,11 +10,11 @@ jobs:
     name: PreCommit
     runs-on: ubuntu-latest
     steps:
-    - uses: DeterminateSystems/nix-installer-action@e50d5f73bfe71c2dd0aa4218de8f4afa59f8f81d # v16
+    - uses: cachix/install-nix-action@a41eb7ceea97962224a9cc9b217ca915f8de2dfd # v31
       with:
-        diagnostic-endpoint: ""
-    - name: Checkout
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Check out code
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
     - name: nix checks
       run: nix flake check
     - name: nix pre-commit
