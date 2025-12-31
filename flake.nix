@@ -36,6 +36,7 @@
             pre-commit
             ruff
             black
+            go-task
           ];
           PYTHONDONTWRITEBYTECODE = 1;
         };
