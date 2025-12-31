@@ -13,6 +13,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Update pre-commit hooks
-        uses: brokenpip3/action-pre-commit-update@58089b10c2e135cfddfbcd36a85afdf73da5b0ce # 0.0.2
+        uses: brokenpip3/action-pre-commit-update@e8d07b1bfba89898d9d9735e76724f3a63df4a78 # 0.0.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
