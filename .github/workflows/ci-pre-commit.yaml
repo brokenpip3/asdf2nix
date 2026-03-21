@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+    - main
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
 jobs:
@@ -10,7 +10,7 @@ jobs:
     name: PreCommit
     runs-on: ubuntu-latest
     steps:
-    - uses: cachix/install-nix-action@a41eb7ceea97962224a9cc9b217ca915f8de2dfd # v31
+    - uses: NixOS/nix-installer-action@228d8a956062db04221c97c2794ea443194824aa
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Check out code
