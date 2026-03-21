@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: NixOS/nix-installer-action@228d8a956062db04221c97c2794ea443194824aa
-      with:
-        github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Check out code
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
     - name: nix checks
