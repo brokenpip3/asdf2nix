@@ -10,7 +10,10 @@ jobs:
     name: PreCommit
     runs-on: ubuntu-latest
     steps:
-    - uses: NixOS/nix-installer-action@228d8a956062db04221c97c2794ea443194824aa
+    - uses: NixOS/nix-installer-action@6b8548fe06acfb0155a50ab5d561accb215764cc
+      with:
+        extra-conf: |
+          experimental-features = nix-command flakes
     - name: Check out code
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
     - name: nix checks
