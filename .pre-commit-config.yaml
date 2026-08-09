@@ -6,14 +6,14 @@ repos:
   - id: trailing-whitespace
   - id: check-toml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 943377262562a12b57292fc98fabd7dbf81451fe  # frozen: 0.37.2
+  rev: c4654a7e007c9619a5eb63c39a456572a0fa1851  # frozen: 0.38.0
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
       args: ["--verbose"]
 
 - repo: https://github.com/asottile/reorder-python-imports
-  rev: 7885866bd38c852b5e042c4aeef0285d715ffeee  # frozen: v3.16.0
+  rev: 5e38415c12154247a099c7023c210e3d458275b5  # frozen: v3.17.0
   hooks:
   -   id: reorder-python-imports
 
