@@ -1,37 +1,44 @@
 {
-  description = "Application packaged using poetry2nix";
+  description = "Asdf2Nix - A tool to convert asdf plugins to nix expressions";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     flake-utils.url = "github:numtide/flake-utils";
-    poetry2nix = {
-      url = "github:nix-community/poetry2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, poetry2nix }:
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication;
+        pyproject = pkgs.lib.importTOML ./pyproject.toml;
+        python = pkgs.python313;
+
+        asdf2nix = python.pkgs.buildPythonApplication {
+          pname = "asdf2nix";
+          version = pyproject.tool.poetry.version;
+          src = self;
+          pyproject = true;
+          build-system = [ python.pkgs.poetry-core ];
+          propagatedBuildInputs = with python.pkgs; [
+            typer
+            requests
+          ];
+        };
       in
       {
-        # nix fmt formatter
-        formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+        formatter = pkgs.nixpkgs-fmt;
 
         packages = {
-          asdf2nix = mkPoetryApplication {
-            python = pkgs.python3;
-            projectDir = self;
-          };
-          default = self.packages.${system}.asdf2nix;
+          asdf2nix = asdf2nix;
+          default = asdf2nix;
         };
 
         devShells.default = pkgs.mkShell {
-          inputsFrom = [ self.packages.${system}.asdf2nix ];
+          inputsFrom = [ asdf2nix ];
           packages = with pkgs; [
-            python3
+            asdf2nix
+            python
+            python.pkgs.pytest
             poetry
             pre-commit
             ruff

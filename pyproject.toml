@@ -10,9 +10,9 @@ readme = "README.md"
 asdf2nix = "asdf2nix.asdf2nix:app"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-typer = {extras = ["all"], version = "^0.10.0"}
-requests = "^2.31.0"
+python = "^3.13"
+typer = {extras = ["all"], version = "^0.24.0"}
+requests = "^2.33.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"

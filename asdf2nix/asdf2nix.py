@@ -3,12 +3,12 @@ import subprocess
 import warnings
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Annotated
 from typing import List
 from typing import Optional
 
 import requests
 import typer
-from typing_extensions import Annotated
 
 
 @dataclass
@@ -163,7 +163,7 @@ def get_revised_tools(tools_lines: List[str]) -> List[Tool]:
 
 @app.command()
 def flake(
-    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None
+    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None,
 ) -> str:
     """
     Generate a flake from .tool-versions file.
@@ -178,7 +178,7 @@ def flake(
 
 @app.command()
 def shell(
-    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None
+    file: Annotated[Optional[str], typer.Argument(help=".tool-versions file")] = None,
 ) -> str:
     """
     Run a nix shell from .tool-versions file.
