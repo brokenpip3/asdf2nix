@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asdf2nix"
-version = "0.6.0"
+version = "0.7.0"
 description = "Generate Flake or run a shell from an asdf .tool-versions file"
 authors = ["Brokenpip3 <brokenpip3@gmail.com>"]
 license = "MIT"
@@ -10,9 +10,9 @@ readme = "README.md"
 asdf2nix = "asdf2nix.asdf2nix:app"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-typer = {extras = ["all"], version = "^0.10.0"}
-requests = "^2.31.0"
+python = "^3.13"
+typer = {extras = ["all"], version = "^0.24.0"}
+requests = "^2.33.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
