@@ -6,19 +6,19 @@ repos:
   - id: trailing-whitespace
   - id: check-toml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: c4654a7e007c9619a5eb63c39a456572a0fa1851  # frozen: 0.38.0
+  rev: 39478bf2c099a58683d3f1aedf675105318b078d  # frozen: 0.39.0
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
       args: ["--verbose"]
 
 - repo: https://github.com/asottile/reorder-python-imports
-  rev: 5e38415c12154247a099c7023c210e3d458275b5  # frozen: v3.17.0
+  rev: 4690733311bbfba33558e4d50a7f0092c64d78d8  # frozen: v3.19.0
   hooks:
   -   id: reorder-python-imports
 
 - repo: https://github.com/psf/black
-  rev: 87928e6d6761a4a6d22250e1fee5601b3998086e  # frozen: 26.5.1
+  rev: 258e7dbf348bc23cb70b8cdf693481c04634ebcc  # frozen: 26.10.1
   hooks:
   -   id: black
 
