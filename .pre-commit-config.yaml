@@ -6,7 +6,7 @@ repos:
   - id: trailing-whitespace
   - id: check-toml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 39478bf2c099a58683d3f1aedf675105318b078d  # frozen: 0.39.0
+  rev: d1da4c0f8c655437c971dd11256394e34b4dbedd  # frozen: 0.40.0
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
